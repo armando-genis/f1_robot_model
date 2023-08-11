@@ -48,7 +48,9 @@
     <xacro:box_inertia m="15" w="${base_width}" d="${base_length}" h="${base_height}"/>
 
 
+
   </link>
+
 
   <!-- Front Left Wheel (Steerable) -->
   <link name="front_left_wheel">
@@ -71,9 +73,18 @@
 
       <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"/>
 
+
+    <inertial>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <mass value="1.3729096e+00"/>
+              <inertia ixx="8.7002718e-03" ixy="-4.7576583e-05" ixz="1.1160499e-04"
+                        iyy="8.6195418e-03" iyz="-3.5422299e-06"
+                        izz="1.4612727e-02" />
+    </inertial>
+
   </link>
   
-  <joint name="front_left_wheel_joint" type="revolute">
+  <joint name="front_left_joint" type="revolute">
     <parent link="base_link"/>
     <child link="front_left_wheel"/>
     <origin xyz="${wheel_xoff_front} ${base_width/2 + wheel_width/2} ${-wheel_zoff}" rpy="0 0 0"/>
@@ -103,9 +114,17 @@
 
       <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"/>
 
+    <inertial>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <mass value="1.3729096e+00"/>
+              <inertia ixx="8.7002718e-03" ixy="-4.7576583e-05" ixz="1.1160499e-04"
+                        iyy="8.6195418e-03" iyz="-3.5422299e-06"
+                        izz="1.4612727e-02" />
+    </inertial>
+
   </link>
 
-  <joint name="front_right_wheel_joint" type="revolute">
+  <joint name="front_right_joint" type="revolute">
     <parent link="base_link"/>
     <child link="front_right_wheel"/>
     <origin xyz="${wheel_xoff_front} ${-base_width/2 - wheel_width/2} ${-wheel_zoff}" rpy="0 0 0"/>
@@ -135,9 +154,17 @@
 
       <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"/>
 
+    <inertial>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <mass value="1.3729096e+00"/>
+              <inertia ixx="8.7002718e-03" ixy="-4.7576583e-05" ixz="1.1160499e-04"
+                        iyy="8.6195418e-03" iyz="-3.5422299e-06"
+                        izz="1.4612727e-02" />
+    </inertial>
+
   </link>
 
-  <joint name="rear_left_wheel_joint" type="continuous">
+  <joint name="rear_left_joint" type="continuous">
     <parent link="base_link"/>
     <child link="rear_left_wheel"/>
     <origin xyz="${wheel_xoff_rear} ${base_width/2 + wheel_width/2} ${-wheel_zoff}" rpy="0 0 0"/>
@@ -166,9 +193,18 @@
 
       <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"/>
 
+
+    <inertial>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <mass value="1.3729096e+00"/>
+              <inertia ixx="8.7002718e-03" ixy="-4.7576583e-05" ixz="1.1160499e-04"
+                        iyy="8.6195418e-03" iyz="-3.5422299e-06"
+                        izz="1.4612727e-02" />
+    </inertial>
+
   </link>
 
-  <joint name="rear_right_wheel_joint" type="continuous">
+  <joint name="rear_right_joint" type="continuous">
     <parent link="base_link"/>
     <child link="rear_right_wheel"/>
     <origin xyz="${wheel_xoff_rear} ${-base_width/2 - wheel_width/2} ${-wheel_zoff}" rpy="0 0 0"/>
@@ -206,7 +242,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find f1_robot_model)//meshes/hokuyo.stl"/>
+        <mesh filename="file://$(find f1_robot_model)/meshes/hokuyo.stl"/>
         <material name="grey" />
       </geometry>
     </visual>
@@ -253,6 +289,46 @@
     </sensor>
   </gazebo>
 
+  <gazebo>
+    <plugin name="ackermann_drive_controller" filename="libgazebo_ros_ackermann_drive.so">
+      <ros>
+        <namespace>/f1_robot</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+      </ros>
+
+      <!-- Ackermann Drive Settings -->
+      <steering_left_joint>front_left_joint</steering_left_joint>
+      <steering_right_joint>front_right_joint</steering_right_joint>
+      <front_left_joint>front_left_wheel</front_left_joint>
+      <front_right_joint>front_right_wheel</front_right_joint>
+      <rear_left_joint>rear_left_wheel</rear_left_joint>
+      <rear_right_joint>rear_right_wheel</rear_right_joint>
+
+      <!-- Wheel Parameters -->
+      <wheelbase>0.55</wheelbase>
+      <front_track>0.31</front_track>
+      <rear_track>0.31</rear_track>
+      <wheel_radius>${wheel_radius}</wheel_radius>
+      <torque>10</torque>
+      <speed>5</speed>
+      <update_rate>100.0</update_rate>
+
+      <!-- Steering Limits -->
+      <max_steering_angle>0.785398</max_steering_angle>
+      <min_steering_angle>-0.785398</min_steering_angle>
+
+      <!-- PID Controller for Steering -->
+      <pid>
+        <p>100.0</p>
+        <i>0.1</i>
+        <d>10.0</d>
+        <i_clamp>1.0</i_clamp>
+      </pid>
+    </plugin>
+  </gazebo>
+
+
+
 </robot>
 
 
@@ -268,7 +344,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find f1_robot_model)//meshes/hokuyo.stl"/>
+        <mesh filename="file://$(find f1_robot_model)/meshes/hokuyo.stl"/>
         <material name="grey" />
       </geometry>
     </visual>
