@@ -8,13 +8,18 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-
+  <!-- Robot modeling in rviz and gazebo -->
   <depend>joint_state_publisher</depend>
   <depend>robot_state_publisher</depend>
   <depend>rviz</depend>
   <depend>xacro</depend>
   <depend>gazebo_ros_ackermann_drive</depend>
   <depend>gazebo_ros</depend>
+  <!-- Message depend -->
+  <depend>ackermann_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rclcpp</depend>
+
 
 
   <test_depend>ament_lint_auto</test_depend>

@@ -92,8 +92,8 @@
 
       <ros>
         <namespace>racecar</namespace>
-        <remapping>cmd_vel:=cmd_demo</remapping>
-        <remapping>odom:=odom_demo</remapping>
+        <remapping>cmd_vel:=cmd_racecar</remapping>
+        <remapping>odom:=odom_racecar</remapping>
 
       </ros>
 
@@ -134,7 +134,7 @@
       <publish_distance>false</publish_distance>
 
       <odometry_frame>odom_demo</odometry_frame>
-      <robot_base_frame>base_footprint</robot_base_frame>
+      <robot_base_frame>base_link</robot_base_frame>
 
 
     </plugin>

@@ -32,6 +32,14 @@ def generate_launch_description():
     arguments=['-entity', 'racecar', '-topic', 'robot_description'],
     output='screen'
     )
+
+    ackermann_to_twist_converter_node = launch_ros.actions.Node(
+        package='f1_robot_model',  
+        executable='ackermann_to_twist_converter_node',
+        name='ackermann_to_twist_converter_node',
+        output='screen'
+    )
+
     return launch.LaunchDescription([
 
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
@@ -42,5 +50,6 @@ def generate_launch_description():
         joint_state_publisher_node,
         robot_state_publisher_node,
         spawn_entity,
-        rviz_node
+        rviz_node,
+        ackermann_to_twist_converter_node
     ])

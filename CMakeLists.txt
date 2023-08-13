@@ -21,6 +21,9 @@ find_package(joint_state_publisher REQUIRED)
 find_package(robot_state_publisher REQUIRED)
 find_package(rviz REQUIRED)
 find_package(xacro REQUIRED)
+find_package(ackermann_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rclcpp REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -33,8 +36,17 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+
+add_executable(ackermann_to_twist_converter_node src/ackermann_to_cmd_vel.cpp)
+ament_target_dependencies(ackermann_to_twist_converter_node rclcpp ackermann_msgs geometry_msgs)
+
+install(TARGETS
+  ackermann_to_twist_converter_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(
-  DIRECTORY urdf launch rviz world meshes
+  DIRECTORY urdf launch rviz world meshes src
   DESTINATION share/${PROJECT_NAME}
 )
 
