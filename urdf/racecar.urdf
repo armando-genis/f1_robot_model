@@ -12,6 +12,9 @@
       <xacro:chassis_geometry/>
       <material name="blue" />
     </visual>
+    <inertial>
+      <xacro:chassis_inertial_params />
+    </inertial>
   </link>
 
   <joint name="base_link_joint" type="fixed">
@@ -20,17 +23,6 @@
     <child link="chassis" />
   </joint>
 
-  <link name="chassis_inertia">
-    <inertial>
-      <xacro:chassis_inertial_params />
-    </inertial>
-  </link>
-
-  <joint name="chassis_inertia_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="chassis" />
-    <child link="chassis_inertia" />
-  </joint>
 
   <!-- Add the left rear wheel with its joints and tranmissions -->
 

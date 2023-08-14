@@ -10,6 +10,12 @@ def generate_launch_description():
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
     world_path=os.path.join(pkg_share, 'world/my_world.sdf')
     use_sim_time = LaunchConfiguration('use_sim_time') 
+
+    # Position and orientation
+    # [X, Y, Z]
+    position = [0.0, 0.0, 0.0]
+    # [Roll, Pitch, Yaw]
+    orientation = [0.0, 0.0, 0.0]
     
     
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -41,7 +47,7 @@ def generate_launch_description():
     spawn_entity = launch_ros.actions.Node(
     package='gazebo_ros',
     executable='spawn_entity.py',
-    arguments=['-entity', 'racecar', '-topic', 'robot_description'],
+    arguments=['-entity', 'racecar', '-x', str(position[0]), '-y', str(position[1]), '-z', str(position[2]), '-R', str(orientation[0]), '-P', str(orientation[1]), '-Y', str(orientation[2]),'-topic', '/robot_description'],
     output='screen'
     )
 
