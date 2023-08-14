@@ -23,6 +23,11 @@
     <child link="chassis" />
   </joint>
 
+  <!-- <joint name="chassis_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="chassis" />
+  </joint> -->
+
 
   <!-- Add the left rear wheel with its joints and tranmissions -->
 
