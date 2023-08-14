@@ -28,7 +28,24 @@ Write in shell #2
 
 ros2 topic pub /ackermann_cmd ackermann_msgs/msg/AckermannDriveStamped "{header: {stamp: {sec: 0, nanosec: 0}, frame_id: 'base_link'}, drive: {speed: 0.0, steering_angle: 0.5}}"
 ```
-
+## Distribution
+f1_robot_model/
+|-- src/
+|   |-- ackermann_to_cmd_vel.cpp
+|-- world/
+|   |-- empty_world.sdf
+|   |-- my_world.sdf
+|-- urdf/
+|   |-- macros.xacro
+|   |-- materials.xacro
+|   |-- racecar.gazebo
+|   |-- racecar.urdf
+|-- rviz/
+|   |-- urdf_config.rviz
+|-- launch/
+|   |-- display.launch.py
+|-- CMakeLists.txt
+|-- package.xml
 
 ## Authors
 
