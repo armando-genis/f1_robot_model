@@ -43,7 +43,6 @@
                                               izz="4E-06" />
 </xacro:macro>
 
-
 <!-- geometry macros -->
 
 <xacro:macro name="chassis_geometry">

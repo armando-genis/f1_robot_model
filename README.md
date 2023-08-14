@@ -13,19 +13,18 @@ sudo apt install ros-<ros2-distro>-ackermann-msgs
 
 ## Run Locally
 
-Write in shell #1
+Write in shell #1 in the ros2_ws
 
 ```bash
-cd ros2_ws
 source /opt/ros/foxy/setup.bash
-source install/setup.bash
 colcon build --packages-select f1_robot_model
+source install/setup.bash
 ros2 launch f1_robot_model display.launch.py
 ```
 
 Write in shell #2
 ```bash
-
+source /opt/ros/foxy/setup.bash
 ros2 topic pub /ackermann_cmd ackermann_msgs/msg/AckermannDriveStamped "{header: {stamp: {sec: 0, nanosec: 0}, frame_id: 'base_link'}, drive: {speed: 0.0, steering_angle: 0.5}}"
 ```
 ## Distribution
