@@ -32,4 +32,4 @@ ros2 topic pub /ackermann_cmd ackermann_msgs/msg/AckermannDriveStamped "{header:
 
 ## Authors
 
-- [@armando-genis](https://www.github.com/octokatherine)
+- [@armando-genis](https://github.com/armando-genis)
