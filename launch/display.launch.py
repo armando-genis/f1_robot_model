@@ -8,7 +8,7 @@ def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='f1_robot_model').find('f1_robot_model')
     default_model_path = os.path.join(pkg_share, 'urdf/racecar.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
-    world_path=os.path.join(pkg_share, 'world/my_world.sdf')
+    world_path=os.path.join(pkg_share, 'world/empty_world.sdf')
     use_sim_time = LaunchConfiguration('use_sim_time') 
 
     # Position and orientation
@@ -41,15 +41,15 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        output='screen',
+        # output='screen',
         arguments=['-d', LaunchConfiguration('rvizconfig')],
         parameters=[{'use_sim_time': use_sim_time}],
     )
     spawn_entity = launch_ros.actions.Node(
-    package='gazebo_ros',
-    executable='spawn_entity.py',
-    arguments=['-entity', 'racecar', '-x', str(position[0]), '-y', str(position[1]), '-z', str(position[2]), '-R', str(orientation[0]), '-P', str(orientation[1]), '-Y', str(orientation[2]),'-topic', '/robot_description'],
-    output='screen'
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        arguments=['-entity', 'racecar', '-x', str(position[0]), '-y', str(position[1]), '-z', str(position[2]), '-R', str(orientation[0]), '-P', str(orientation[1]), '-Y', str(orientation[2]),'-topic', '/robot_description'],
+        output='screen'
     )
 
     ackermann_to_twist_converter_node = launch_ros.actions.Node(
