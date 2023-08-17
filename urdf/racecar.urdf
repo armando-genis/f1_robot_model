@@ -18,16 +18,19 @@
   </link>
 
   <joint name="base_link_joint" type="fixed">
-    <origin xyz="0 0 0.05" rpy="0 0 0" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="chassis" />
   </joint>
 
-  <!-- <joint name="chassis_joint" type="fixed">
-    <parent link="base_link" />
-    <child link="chassis" />
-  </joint> -->
+  <!-- Robot Footprint -->
+  <link name="base_footprint"/>
 
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin xyz="0.0 0.0 -0.05" rpy="0 0 0"/>
+  </joint>
 
   <!-- Add the left rear wheel with its joints and tranmissions -->
 
