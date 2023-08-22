@@ -17,10 +17,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(joint_state_publisher REQUIRED)
-find_package(robot_state_publisher REQUIRED)
-find_package(rviz REQUIRED)
-find_package(xacro REQUIRED)
+
 find_package(ackermann_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
