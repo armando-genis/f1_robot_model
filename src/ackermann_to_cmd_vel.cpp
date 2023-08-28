@@ -7,7 +7,7 @@ class AckermannToTwistConverter : public rclcpp::Node
 public:
     AckermannToTwistConverter() : Node("ackermann_to_twist_converter_node")
     {
-        twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/racecar/cmd_racecar", 10);
+        twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
         ackermann_subscriber_ = this->create_subscription<ackermann_msgs::msg::AckermannDriveStamped>(
             "ackermann_cmd", 
             10, 
