@@ -16,7 +16,8 @@ sudo apt install ros-<ros2-distro>-ackermann-msgs
 Write in shell #1 in the ros2_ws
 
 ```bash
-source /opt/ros/foxy/setup.bash
+source /opt/ros/foxy/setup.bash #for ros2 foxy
+source /opt/ros/humble/setup.bash #for ro2 humble
 colcon build --packages-select f1_robot_model
 source install/setup.bash
 ros2 launch f1_robot_model display.launch.py
